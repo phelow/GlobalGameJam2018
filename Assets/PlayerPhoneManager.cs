@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerPhoneManager : MonoBehaviour {
 
-    public Receiver heldPhone;
+    public Receiver _heldPhone;
 
 	// Use this for initialization
 	void Start () {
@@ -18,13 +18,21 @@ public class PlayerPhoneManager : MonoBehaviour {
     
     void OnTriggerEnter2D(Collider2D other)
     {
+        Monster monster = other.gameObject.GetComponent<Monster>();
         Receiver handheld = other.gameObject.GetComponent<Receiver>();
-        if (heldPhone == null)
+        if (_heldPhone == null)
         {
-            if (handheld != null)
+            if (handheld != null && handheld.Isheld() == false)
             {
                 other.gameObject.transform.SetParent(this.transform);
-                heldPhone = handheld;
+                _heldPhone = handheld;
+            }
+        }
+        else if (monster != null && _heldPhone != null)
+        {
+            if (monster.GivePhone(_heldPhone))
+            {
+                _heldPhone = null;
             }
         }
     }
