@@ -42,6 +42,12 @@ public class Monster : Tutorializeable {
         _matches.Add(monsterB);
     }
 
+    internal void EndCall()
+    {
+        _phone.transform.SetParent(null);
+        _phone = null;
+    }
+
     internal IEnumerable<Monster> GetMatches()
     {
         return _matches;

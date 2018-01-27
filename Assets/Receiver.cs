@@ -7,9 +7,10 @@ public class Receiver : Tutorializeable {
     private Monster _holder;
     [SerializeField]
     private Receiver _pairedReceiver;
+    private const float c_callTime = 1.0f;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -21,6 +22,29 @@ public class Receiver : Tutorializeable {
     internal void SetHolder(Monster monster)
     {
         _holder = monster;
+
+        if (_pairedReceiver.GetHolder() != null)
+        {
+            StartCoroutine(PlaceCall());
+        }
+    }
+
+    private IEnumerator PlaceCall()
+    {
+        yield return new WaitForSeconds(c_callTime);
+        _pairedReceiver.EndCall();
+        this.EndCall();
+    }
+
+    internal void EndCall()
+    {
+        this._holder.EndCall();
+        this._holder = null;
+    }
+
+    internal Monster GetHolder()
+    {
+        return _holder;
     }
 
     internal bool Isheld()
