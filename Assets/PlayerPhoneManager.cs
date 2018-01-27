@@ -89,7 +89,7 @@ public class PlayerPhoneManager : MonoBehaviour
                 //If all of the matches of the monster on the other line are holding phones do not let the player pick up the phone o
                 
 
-                if(HasPotentialMatch(handheld))
+                if(!HasPotentialMatch(handheld))
                 {
                     return;
                 }
