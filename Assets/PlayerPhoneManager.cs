@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerPhoneManager : MonoBehaviour
@@ -46,7 +47,7 @@ public class PlayerPhoneManager : MonoBehaviour
         {
             foreach (Receiver reciever in _recievers)
             {
-                if (reciever.Isheld())
+                if (reciever.Isheld() || !HasPotentialMatch(reciever))
                 {
                     continue;
                 }
@@ -86,24 +87,9 @@ public class PlayerPhoneManager : MonoBehaviour
             if (handheld != null && handheld.Isheld() == false)
             {
                 //If all of the matches of the monster on the other line are holding phones do not let the player pick up the phone o
-                bool hasPotentialMatch = false;
+                
 
-                if (handheld.HasMonsterOnOtherEnd())
-                {
-                    foreach(Monster match in handheld.GetMonsterOnOtherEnd().GetMatches())
-                    {
-                        if (!match.HasPhone())
-                        {
-                            hasPotentialMatch = true;
-                        }
-                    }
-                }
-                else
-                {
-                    hasPotentialMatch = true;
-                }
-
-                if(hasPotentialMatch == false)
+                if(HasPotentialMatch(handheld))
                 {
                     return;
                 }
@@ -120,6 +106,28 @@ public class PlayerPhoneManager : MonoBehaviour
                 _heldPhone = null;
             }
         }
+    }
+
+    private bool HasPotentialMatch(Receiver handheld)
+    {
+        bool hasPotentialMatch = false;
+
+        if (handheld.HasMonsterOnOtherEnd())
+        {
+            foreach (Monster match in handheld.GetMonsterOnOtherEnd().GetMatches())
+            {
+                if (!match.HasPhone())
+                {
+                    hasPotentialMatch = true;
+                }
+            }
+        }
+        else
+        {
+            hasPotentialMatch = true;
+        }
+
+        return hasPotentialMatch;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
