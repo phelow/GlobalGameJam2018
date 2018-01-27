@@ -28,8 +28,8 @@ public class GameMaster : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        _boundX = 10;
-        _boundY = 10;
+        _boundX = 30;
+        _boundY = 30;
 
         StartCoroutine(MatchMonsters());
         StartCoroutine(SpawnMonsters());
@@ -68,19 +68,36 @@ public class GameMaster : MonoBehaviour {
 
     private void SpawnPhone()
     {
-        Phone phone = GameObject.Instantiate(_phone, new Vector3(UnityEngine.Random.Range(-_boundX, _boundX), UnityEngine.Random.Range(-_boundY, _boundY), 1), new Quaternion(0,0,0,0), null).GetComponent<Phone>();
         _boundX++;
         _boundY++;
+        Vector3 point = new Vector3(UnityEngine.Random.Range(-_boundX, _boundX), UnityEngine.Random.Range(-_boundY, _boundY), 1);
 
+        Vector2 screenPos = Camera.main.WorldToScreenPoint(point);
+
+        if (point.x > -.5f && point.x < 1.5 && point.y > -.5f && point.y < 1.5f)
+        {
+            return;
+        }
+        Phone phone = GameObject.Instantiate(_phone, point, new Quaternion(0,0,0,0), null).GetComponent<Phone>();
+        
         PlayerPhoneManager.s_instance.AddPhone(phone);
     }
 
     private void SpawnMonster()
     {
-        Monster monster = GameObject.Instantiate(_monster, new Vector3(UnityEngine.Random.Range(-_boundX, _boundX), UnityEngine.Random.Range(-_boundY, _boundY), 1), new Quaternion(0, 0, 0, 0), null).GetComponent<Monster>();
         _boundX++;
         _boundY++;
+        Vector3 point = new Vector3(UnityEngine.Random.Range(-_boundX, _boundX), UnityEngine.Random.Range(-_boundY, _boundY), 1);
 
+        Vector2 screenPos = Camera.main.WorldToScreenPoint(point);
+
+        if(point.x > -.5f && point.x < 1.5 && point.y > -.5f && point.y < 1.5f)
+        {
+            return;
+        }
+
+        Monster monster = GameObject.Instantiate(_monster, point, new Quaternion(0, 0, 0, 0), null).GetComponent<Monster>();
+        
 
         _monsters.Add(monster);
     }
@@ -89,7 +106,7 @@ public class GameMaster : MonoBehaviour {
     {
         while (true)
         {
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(10.0f);
             Monster monsterA = _monsters[UnityEngine.Random.Range(0, _monsters.Count)];
             Monster monsterB = _monsters[UnityEngine.Random.Range(0, _monsters.Count)];
 
