@@ -6,6 +6,10 @@ using UnityEngine;
 public class Monster : MonoBehaviour {
 
     private Receiver _phone;
+    private Monster _match;
+
+    [SerializeField]
+    private LineRenderer _tutorialLineRenderer;
 
 	// Use this for initialization
 	void Start () {
@@ -28,5 +32,15 @@ public class Monster : MonoBehaviour {
         }
 
         return false;
+    }
+
+    internal bool HasMatch()
+    {
+        return _match != null;
+    }
+
+    internal void SetMatch(Monster monsterB)
+    {
+        _match = monsterB;
     }
 }

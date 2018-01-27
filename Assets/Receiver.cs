@@ -3,8 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Receiver : MonoBehaviour {
+public class Receiver : Tutorializeable {
     private Monster _holder;
+    [SerializeField]
+    private Receiver _pairedReceiver;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -24,4 +27,5 @@ public class Receiver : MonoBehaviour {
     {
         return _holder != null;
     }
+
 }
