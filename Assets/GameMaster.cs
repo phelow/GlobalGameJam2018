@@ -92,8 +92,8 @@ public class GameMaster : MonoBehaviour {
         }
     }
 
-    internal IEnumerable<Monster> GetAllMonstersWithMatches()
+    internal IEnumerable<Monster> GetAllMonstersWithMatchesWhoNeedPhones()
     {
-        return _monsters.Where(monster => monster.HasMatch());
+        return _monsters.Where(monster => monster.HasMatch() && !monster.HasPhone());
     }
 }

@@ -55,6 +55,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4416075132609260}
+  - component: {fileID: 114565196135129254}
   m_Layer: 0
   m_Name: Phone
   m_TagString: Untagged
@@ -341,6 +342,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tutorialLineRenderer: {fileID: 120562112097869870}
   _pairedReceiver: {fileID: 114141049180761156}
+--- !u!114 &114565196135129254
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1629300059893668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a289dfeb794b21b4baa190fd2c76c466, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recieverA: {fileID: 114141049180761156}
+  recieverB: {fileID: 114189130851200360}
 --- !u!114 &114995836939047576
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -394,7 +408,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 1
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:

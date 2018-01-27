@@ -6,18 +6,34 @@ using UnityEngine;
 public class Monster : Tutorializeable {
 
     private Receiver _phone;
-    private List<Monster> _matches;
-    
-	// Use this for initialization
-	void Start () {
-        _matches = new List<Monster>();
+    private List<Monster> _matches = new List<Monster>();
+    private float _health = 1.0f;
+    private const float c_timeModifier = 0.01f;
 
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		
+    // Update is called once per frame
+    void Update () {
+		if(_phone == null || _phone.GetMonsterOnOtherEnd() == null || !_matches.Contains(_phone.GetMonsterOnOtherEnd()))
+        {
+            SubtractHealth(Time.deltaTime * c_timeModifier);
+        }
 	}
+
+    private void SubtractHealth(float deltaTime)
+    {
+        _health -= deltaTime;
+        if(_health < 0)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        }
+
+        SetUrgency(_health);
+    }
+
+    internal void ResetHealth()
+    {
+        _health = 1.0f;
+        SetUrgency(_health);
+    }
 
     internal bool GivePhone(Receiver phone)
     {
@@ -51,5 +67,10 @@ public class Monster : Tutorializeable {
     internal IEnumerable<Monster> GetMatches()
     {
         return _matches;
+    }
+
+    internal bool HasPhone()
+    {
+        return _phone != null;
     }
 }

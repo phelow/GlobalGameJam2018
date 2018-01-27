@@ -63,7 +63,7 @@ public class PlayerPhoneManager : MonoBehaviour
             }
             else
             {
-                foreach (Monster monster in GameMaster.s_instance.GetAllMonstersWithMatches())
+                foreach (Monster monster in GameMaster.s_instance.GetAllMonstersWithMatchesWhoNeedPhones())
                     monster.SetTutorialTarget(this.transform.position);
             }
         }
