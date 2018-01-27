@@ -5,7 +5,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameMaster : MonoBehaviour {
+public class GameMaster : MonoBehaviour
+{
     [SerializeField]
     private List<Monster> _monsters;
     internal static GameMaster s_instance;
@@ -27,14 +28,15 @@ public class GameMaster : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
-        _boundX = 30;
-        _boundY = 30;
+    void Start()
+    {
+        _boundX = 5;
+        _boundY = 5;
 
         StartCoroutine(MatchMonsters());
         StartCoroutine(SpawnMonsters());
-	}
-	
+    }
+
     internal List<Monster> GetAllMonsters()
     {
         return _monsters;
@@ -44,7 +46,7 @@ public class GameMaster : MonoBehaviour {
     {
         PlayerPrefs.SetInt("HighScore", _score);
     }
-    
+
     public void AddPoint()
     {
         _score++;
@@ -70,7 +72,31 @@ public class GameMaster : MonoBehaviour {
     {
         _boundX++;
         _boundY++;
-        Vector3 point = new Vector3(UnityEngine.Random.Range(-_boundX, _boundX), UnityEngine.Random.Range(-_boundY, _boundY), 1);
+        int x;
+        if (UnityEngine.Random.Range(0, 100) < 50)
+        {
+            int startingPoint = (int)Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).x;
+            x = UnityEngine.Random.Range(startingPoint - _boundX, startingPoint) - _boundX;
+        }
+        else
+        {
+            int startingPoint = (int)Camera.main.ScreenToWorldPoint(new Vector3(1, 1, 1)).x;
+            x = UnityEngine.Random.Range(startingPoint, startingPoint + _boundX) + _boundX;
+        }
+
+        int y;
+        if (UnityEngine.Random.Range(0, 100) < 50)
+        {
+            int startingPoint = (int)Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).y;
+            y = UnityEngine.Random.Range(startingPoint - _boundY, startingPoint) - _boundY;
+        }
+        else
+        {
+            int startingPoint = (int)Camera.main.ScreenToWorldPoint(new Vector3(1, 1, 1)).y;
+            y = UnityEngine.Random.Range(startingPoint, startingPoint + _boundY) + _boundY;
+        }
+
+        Vector3 point = new Vector3(x, y, 1);
 
         Vector2 screenPos = Camera.main.WorldToScreenPoint(point);
 
@@ -78,8 +104,8 @@ public class GameMaster : MonoBehaviour {
         {
             return;
         }
-        Phone phone = GameObject.Instantiate(_phone, point, new Quaternion(0,0,0,0), null).GetComponent<Phone>();
-        
+        Phone phone = GameObject.Instantiate(_phone, point, new Quaternion(0, 0, 0, 0), null).GetComponent<Phone>();
+
         PlayerPhoneManager.s_instance.AddPhone(phone);
     }
 
@@ -87,17 +113,35 @@ public class GameMaster : MonoBehaviour {
     {
         _boundX++;
         _boundY++;
-        Vector3 point = new Vector3(UnityEngine.Random.Range(-_boundX, _boundX), UnityEngine.Random.Range(-_boundY, _boundY), 1);
-
-        Vector2 screenPos = Camera.main.WorldToScreenPoint(point);
-
-        if(point.x > -.5f && point.x < 1.5 && point.y > -.5f && point.y < 1.5f)
+        int x;
+        if (UnityEngine.Random.Range(0, 100) < 50)
         {
-            return;
+            int startingPoint = (int)Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).x;
+            x = UnityEngine.Random.Range(startingPoint - _boundX, startingPoint) - _boundX;
+        }
+        else
+        {
+            int startingPoint = (int)Camera.main.ScreenToWorldPoint(new Vector3(1, 1, 1)).x;
+            x = UnityEngine.Random.Range(startingPoint, startingPoint + _boundX) + _boundX;
         }
 
+        int y;
+        if (UnityEngine.Random.Range(0, 100) < 50)
+        {
+            int startingPoint = (int)Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)).y;
+            y = UnityEngine.Random.Range(startingPoint - _boundY, startingPoint) - _boundY;
+        }
+        else
+        {
+            int startingPoint = (int)Camera.main.ScreenToWorldPoint(new Vector3(1, 1, 1)).y;
+            y = UnityEngine.Random.Range(startingPoint, startingPoint + _boundY) + _boundY;
+        }
+
+        Vector3 point = new Vector3(x, y, 1);
+        Vector2 screenPos = Camera.main.WorldToScreenPoint(point);
+
         Monster monster = GameObject.Instantiate(_monster, point, new Quaternion(0, 0, 0, 0), null).GetComponent<Monster>();
-        
+
 
         _monsters.Add(monster);
     }
@@ -109,13 +153,13 @@ public class GameMaster : MonoBehaviour {
             Monster monsterA = _monsters[UnityEngine.Random.Range(0, _monsters.Count)];
             Monster monsterB = _monsters[UnityEngine.Random.Range(0, _monsters.Count)];
 
-            if(monsterA == monsterB)
+            if (monsterA == monsterB)
             {
                 yield return new WaitForSeconds(10.0f);
                 continue;
             }
 
-            if(monsterA.HasMatch() || monsterB.HasMatch())
+            if (monsterA.HasMatch() || monsterB.HasMatch())
             {
                 yield return new WaitForSeconds(10.0f);
                 continue;
