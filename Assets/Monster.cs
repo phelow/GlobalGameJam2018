@@ -3,18 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster : MonoBehaviour {
+public class Monster : Tutorializeable {
 
     private Receiver _phone;
-    private Monster _match;
-
-    [SerializeField]
-    private LineRenderer _tutorialLineRenderer;
-
+    private List<Monster> _matches;
+    
 	// Use this for initialization
 	void Start () {
-		
-	}
+        _matches = new List<Monster>();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -36,11 +34,16 @@ public class Monster : MonoBehaviour {
 
     internal bool HasMatch()
     {
-        return _match != null;
+        return _matches.Count > 0;
     }
 
-    internal void SetMatch(Monster monsterB)
+    internal void AddMatch(Monster monsterB)
     {
-        _match = monsterB;
+        _matches.Add(monsterB);
+    }
+
+    internal IEnumerable<Monster> GetMatches()
+    {
+        return _matches;
     }
 }

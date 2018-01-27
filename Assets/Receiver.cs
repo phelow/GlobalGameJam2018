@@ -28,4 +28,18 @@ public class Receiver : Tutorializeable {
         return _holder != null;
     }
 
+    internal bool HasMonsterOnOtherEnd()
+    {
+        return _pairedReceiver.Isheld();
+    }
+
+    internal Monster GetMonsterOnOtherEnd()
+    {
+        return _pairedReceiver.GetMonster();
+    }
+
+    internal Monster GetMonster()
+    {
+        return _holder;
+    }
 }

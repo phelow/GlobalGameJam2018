@@ -13,7 +13,7 @@ public class Tutorializeable : MonoBehaviour
     }
 
 
-    internal void ClearTutorialTarget(Vector3 position)
+    internal void ClearTutorialTarget()
     {
         _tutorialLineRenderer.positionCount = 0;
     }
