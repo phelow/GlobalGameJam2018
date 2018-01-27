@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 
 public class PlayerMovement : MonoBehaviour
-{ 
+{
     [SerializeField]
     private Animator m_animator;
     [SerializeField]
@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (movement.magnitude > .03f)
             {
-                m_rigidbody.AddForce(movement.normalized  * c_movementConstant *Time.deltaTime);
+                m_rigidbody.AddForce(movement.normalized * c_movementConstant * Time.deltaTime);
             }
 
             //if (transform.position.x > worldPos.x + .1f)
