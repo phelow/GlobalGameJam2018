@@ -55,7 +55,7 @@ public class Monster : Tutorializeable {
         {
             return false;
         }
-
+        
         if (_phone == null && (phone.GetMonsterOnOtherEnd() == null|| (this._matches.Contains(phone.GetMonsterOnOtherEnd()))))
         {
             _phone = phone;

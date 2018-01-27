@@ -82,8 +82,33 @@ public class PlayerPhoneManager : MonoBehaviour
         Receiver handheld = go.GetComponent<Receiver>();
         if (_heldPhone == null)
         {
+
             if (handheld != null && handheld.Isheld() == false)
             {
+                //If all of the matches of the monster on the other line are holding phones do not let the player pick up the phone o
+                bool hasPotentialMatch = false;
+
+                if (handheld.HasMonsterOnOtherEnd())
+                {
+                    foreach(Monster match in handheld.GetMonsterOnOtherEnd().GetMatches())
+                    {
+                        if (!match.HasPhone())
+                        {
+                            hasPotentialMatch = true;
+                        }
+                    }
+                }
+                else
+                {
+                    hasPotentialMatch = true;
+                }
+
+                if(hasPotentialMatch == false)
+                {
+                    return;
+                }
+
+
                 go.gameObject.transform.SetParent(this.transform);
                 _heldPhone = handheld;
             }
