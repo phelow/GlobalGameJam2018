@@ -69,16 +69,15 @@ public class PlayerPhoneManager : MonoBehaviour
         }
     }
 
-
-    void OnTriggerEnter2D(Collider2D other)
+    private void CollideWithGameObject(GameObject go)
     {
-        Monster monster = other.gameObject.GetComponent<Monster>();
-        Receiver handheld = other.gameObject.GetComponent<Receiver>();
+        Monster monster = go.GetComponent<Monster>();
+        Receiver handheld = go.GetComponent<Receiver>();
         if (_heldPhone == null)
         {
             if (handheld != null && handheld.Isheld() == false)
             {
-                other.gameObject.transform.SetParent(this.transform);
+                go.gameObject.transform.SetParent(this.transform);
                 _heldPhone = handheld;
             }
         }
@@ -89,5 +88,15 @@ public class PlayerPhoneManager : MonoBehaviour
                 _heldPhone = null;
             }
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        this.CollideWithGameObject(collision.gameObject);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        this.CollideWithGameObject(other.gameObject);
     }
 }
