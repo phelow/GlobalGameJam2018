@@ -106,7 +106,6 @@ public class GameMaster : MonoBehaviour {
     {
         while (true)
         {
-            yield return new WaitForSeconds(10.0f);
             Monster monsterA = _monsters[UnityEngine.Random.Range(0, _monsters.Count)];
             Monster monsterB = _monsters[UnityEngine.Random.Range(0, _monsters.Count)];
 
@@ -122,6 +121,7 @@ public class GameMaster : MonoBehaviour {
 
             monsterA.AddMatch(monsterB);
             monsterB.AddMatch(monsterA);
+            yield return new WaitForSeconds(10.0f);
         }
     }
 

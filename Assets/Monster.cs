@@ -12,7 +12,7 @@ public class Monster : Tutorializeable {
 
     // Update is called once per frame
     void Update () {
-		if(_phone == null || _phone.GetMonsterOnOtherEnd() == null || !_matches.Contains(_phone.GetMonsterOnOtherEnd()) && PlayerPhoneManager.s_instance.HasUnusedPhones)
+		if(_matches.Count >0 &&( _phone == null || _phone.GetMonsterOnOtherEnd() == null || !_matches.Contains(_phone.GetMonsterOnOtherEnd()) && PlayerPhoneManager.s_instance.HasUnusedPhones))
         {
             SubtractHealth(Time.deltaTime * c_timeModifier);
         }
@@ -37,7 +37,12 @@ public class Monster : Tutorializeable {
 
     internal bool GivePhone(Receiver phone)
     {
-        if (_phone == null)
+        if(_matches.Count == 0)
+        {
+            return false;
+        }
+
+        if (_phone == null && (phone.GetMonsterOnOtherEnd() == null|| (this._matches.Contains(phone.GetMonsterOnOtherEnd()))))
         {
             _phone = phone;
             _phone.transform.SetParent(this.transform);

@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private Rigidbody2D m_rigidbody;
     private Vector2 m_lastScreenPosition;
-    private const float c_movementConstant = 100.0f;
+    private const float c_movementConstant = 1000.0f;
 
     void Awake()
     {
