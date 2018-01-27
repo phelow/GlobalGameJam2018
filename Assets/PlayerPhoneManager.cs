@@ -32,6 +32,11 @@ public class PlayerPhoneManager : MonoBehaviour
         {
             foreach (Receiver reciever in _recievers)
             {
+                if (reciever.Isheld())
+                {
+                    continue;
+                }
+
                 reciever.SetTutorialTarget(this.transform.position);
             }
         }
@@ -41,8 +46,7 @@ public class PlayerPhoneManager : MonoBehaviour
             {
                 reciever.ClearTutorialTarget();
             }
-
-
+            
             if (_heldPhone.HasMonsterOnOtherEnd())
             {
                 foreach (Monster monster in _heldPhone.GetMonsterOnOtherEnd().GetMatches())
