@@ -20,6 +20,7 @@ public class GameMaster : MonoBehaviour {
     [SerializeField]
     private Text _scoreText;
 
+
     private void Awake()
     {
         s_instance = this;

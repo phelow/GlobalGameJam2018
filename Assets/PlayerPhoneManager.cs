@@ -9,6 +9,8 @@ public class PlayerPhoneManager : MonoBehaviour
 
     [SerializeField]
     private List<Receiver> _recievers;
+    internal bool HasUnusedPhones { get; private set; }
+
 
     // Use this for initialization
     void Start()
@@ -25,8 +27,13 @@ public class PlayerPhoneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        this.HasUnusedPhones = false;
         foreach (Receiver reciever in _recievers)
         {
+            if (!reciever.HasMonsterOnOtherEnd())
+            {
+                this.HasUnusedPhones = true;
+            }
             reciever.ClearTutorialTarget();
         }
 
