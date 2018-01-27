@@ -9,6 +9,20 @@ public class Monster : Tutorializeable {
     private List<Monster> _matches = new List<Monster>();
     private float _health = 1.0f;
     private const float c_timeModifier = 0.01f;
+    [SerializeField]
+    private Rigidbody2D _rigidbody;
+
+    private void Start()
+    {
+        StartCoroutine(DelayedCouroutineFreezing());
+    }
+
+    private IEnumerator DelayedCouroutineFreezing()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+    }
 
     // Update is called once per frame
     void Update () {

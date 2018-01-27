@@ -111,11 +111,13 @@ public class GameMaster : MonoBehaviour {
 
             if(monsterA == monsterB)
             {
+                yield return new WaitForSeconds(10.0f);
                 continue;
             }
 
             if(monsterA.HasMatch() || monsterB.HasMatch())
             {
+                yield return new WaitForSeconds(10.0f);
                 continue;
             }
 

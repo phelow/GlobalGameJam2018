@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tutorialLineRenderer: {fileID: 120740505395001036}
+  _rigidbody: {fileID: 50606661921493370}
 --- !u!120 &120740505395001036
 LineRenderer:
   m_ObjectHideFlags: 1
