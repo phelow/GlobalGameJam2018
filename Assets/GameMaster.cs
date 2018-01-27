@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameMaster : MonoBehaviour {
     [SerializeField]
@@ -15,6 +16,9 @@ public class GameMaster : MonoBehaviour {
     private GameObject _monster;
     [SerializeField]
     private GameObject _phone;
+    private int _score = 0;
+    [SerializeField]
+    private Text _scoreText;
 
     private void Awake()
     {
@@ -33,6 +37,17 @@ public class GameMaster : MonoBehaviour {
     internal List<Monster> GetAllMonsters()
     {
         return _monsters;
+    }
+
+    internal void EndGame()
+    {
+        PlayerPrefs.SetInt("HighScore", _score);
+    }
+    
+    public void AddPoint()
+    {
+        _score++;
+        _scoreText.text = "" + _score;
     }
 
     private IEnumerator SpawnMonsters()

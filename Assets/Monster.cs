@@ -23,7 +23,7 @@ public class Monster : Tutorializeable {
         _health -= deltaTime;
         if(_health < 0)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            GameMaster.s_instance.EndGame();
         }
 
         SetUrgency(_health);

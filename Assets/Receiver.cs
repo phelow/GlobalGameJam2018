@@ -31,6 +31,7 @@ public class Receiver : Tutorializeable {
 
     private IEnumerator PlaceCall()
     {
+        GameMaster.s_instance.AddPoint();
         _pairedReceiver.GetMonster().ResetHealth();
         this.GetMonster().ResetHealth();
         yield return new WaitForSeconds(c_callTime);
