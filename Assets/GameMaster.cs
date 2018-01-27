@@ -8,6 +8,13 @@ public class GameMaster : MonoBehaviour {
     [SerializeField]
     private List<Monster> _monsters;
     internal static GameMaster s_instance;
+    private int _boundX;
+    private int _boundY;
+
+    [SerializeField]
+    private GameObject _monster;
+    [SerializeField]
+    private GameObject _phone;
 
     private void Awake()
     {
@@ -16,12 +23,50 @@ public class GameMaster : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        _boundX = 10;
+        _boundY = 10;
+
         StartCoroutine(MatchMonsters());
+        StartCoroutine(SpawnMonsters());
 	}
 	
     internal List<Monster> GetAllMonsters()
     {
         return _monsters;
+    }
+
+    private IEnumerator SpawnMonsters()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(10.0f);
+            SpawnMonster();
+            yield return new WaitForSeconds(10.0f);
+            SpawnMonster();
+            yield return new WaitForSeconds(10.0f);
+            SpawnMonster();
+            yield return new WaitForSeconds(10.0f);
+            SpawnPhone();
+        }
+    }
+
+    private void SpawnPhone()
+    {
+        Phone phone = GameObject.Instantiate(_phone, new Vector3(UnityEngine.Random.Range(-_boundX, _boundX), UnityEngine.Random.Range(-_boundY, _boundY), 1), new Quaternion(0,0,0,0), null).GetComponent<Phone>();
+        _boundX++;
+        _boundY++;
+
+        PlayerPhoneManager.s_instance.AddPhone(phone);
+    }
+
+    private void SpawnMonster()
+    {
+        Monster monster = GameObject.Instantiate(_monster, new Vector3(UnityEngine.Random.Range(-_boundX, _boundX), UnityEngine.Random.Range(-_boundY, _boundY), 1), new Quaternion(0, 0, 0, 0), null).GetComponent<Monster>();
+        _boundX++;
+        _boundY++;
+
+
+        _monsters.Add(monster);
     }
 
     private IEnumerator MatchMonsters()

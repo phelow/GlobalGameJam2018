@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 383768190}
   - component: {fileID: 383768189}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: GameMAster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -296,6 +296,8 @@ MonoBehaviour:
   _monsters:
   - {fileID: 624876407}
   - {fileID: 654661762}
+  _monster: {fileID: 1131448593166266, guid: 2a8684f8b32de0e44884a7e37cf4b5ba, type: 2}
+  _phone: {fileID: 1629300059893668, guid: 4f1c69fa5c308d64584550a0dc1d86cf, type: 2}
 --- !u!4 &383768190
 Transform:
   m_ObjectHideFlags: 0

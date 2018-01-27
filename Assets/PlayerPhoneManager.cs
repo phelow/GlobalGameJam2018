@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerPhoneManager : MonoBehaviour
 {
+    public static PlayerPhoneManager s_instance;
 
     private Receiver _heldPhone;
 
@@ -12,7 +13,13 @@ public class PlayerPhoneManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        s_instance = this;
+    }
 
+    internal void AddPhone(Phone phone)
+    {
+        _recievers.Add(phone.recieverA);
+        _recievers.Add(phone.recieverB);
     }
 
     // Update is called once per frame

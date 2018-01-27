@@ -7,7 +7,7 @@ public class Receiver : Tutorializeable {
     private Monster _holder;
     [SerializeField]
     private Receiver _pairedReceiver;
-    private const float c_callTime = 1.0f;
+    private const float c_callTime = 30.0f;
 
     // Use this for initialization
     void Start () {
