@@ -191,19 +191,40 @@ public class GameMaster : MonoBehaviour
 
             if (monsterA == monsterB)
             {
-                yield return new WaitForSeconds(10.0f);
+                if (this.m_playerHasMoves)
+                {
+                    yield return new WaitForSeconds(10.0f);
+                }
+                else
+                {
+                    yield return new WaitForEndOfFrame();
+                }
                 continue;
             }
 
             if (monsterA.HasMatch() || monsterB.HasMatch())
             {
-                yield return new WaitForSeconds(10.0f);
+                if (this.m_playerHasMoves)
+                {
+                    yield return new WaitForSeconds(10.0f);
+                }
+                else
+                {
+                    yield return new WaitForEndOfFrame();
+                }
                 continue;
             }
 
             monsterA.AddMatch(monsterB);
             monsterB.AddMatch(monsterA);
-            yield return new WaitForSeconds(10.0f);
+            if (this.m_playerHasMoves)
+            {
+                yield return new WaitForSeconds(10.0f);
+            }
+            else
+            {
+                yield return new WaitForEndOfFrame();
+            }
         }
     }
 
