@@ -49,6 +49,8 @@ public class Receiver : Tutorializeable {
 
     internal void EndCall()
     {
+        this._holder.RemoveMatch(this.GetMonsterOnOtherEnd());
+        this.GetMonsterOnOtherEnd().RemoveMatch(this._holder);
         this._holder.EndCall();
         this._holder = null;
     }

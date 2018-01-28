@@ -38,6 +38,11 @@ public class Monster : Tutorializeable {
         }
 	}
 
+    internal void RemoveMatch(Monster monster)
+    {
+        this._matches.Remove(monster);
+    }
+
     private void SubtractHealth(float deltaTime)
     {
         _health -= deltaTime;
