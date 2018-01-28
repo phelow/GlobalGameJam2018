@@ -46,6 +46,17 @@ public class Monster : Tutorializeable
         _spriteRenderer.sprite = _images[UnityEngine.Random.RandomRange(0, _images.Count)];
         StartCoroutine(DelayedCouroutineFreezing());
         StartCoroutine(Wobble());
+        StartCoroutine(PositionText());
+    }
+
+    private IEnumerator PositionText()
+    {
+        _monsterText.transform.parent.parent.parent = null;
+        while(true)
+        {
+            yield return new WaitForEndOfFrame();
+            _monsterText.transform.position = this.transform.position + Vector3.up * 5;
+        }
     }
 
     private IEnumerator Wobble()
