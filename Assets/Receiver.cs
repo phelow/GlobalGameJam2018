@@ -9,6 +9,12 @@ public class Receiver : Tutorializeable {
     private Receiver _pairedReceiver;
     private const float c_callTime = 30.0f;
 
+    [SerializeField]
+    private GameObject _heart;
+
+    [SerializeField]
+    private GameObject _skull;
+
     // Use this for initialization
     void Start () {
 		
@@ -31,6 +37,8 @@ public class Receiver : Tutorializeable {
 
     private IEnumerator PlaceCall()
     {
+        GameObject.Instantiate(_heart, _pairedReceiver.transform.position, _pairedReceiver.transform.rotation, null);
+        GameObject.Instantiate(_heart, this.transform.position, this.transform.rotation, null);
         MessageSpawner.s_instance.SpawnMessage(this.GetMonsterOnOtherEnd().name + " is dating " + this._holder.name);
         GameMaster.s_instance.AddPoint();
         _pairedReceiver.GetMonster().ResetHealth();
@@ -44,6 +52,8 @@ public class Receiver : Tutorializeable {
             yield return new WaitForEndOfFrame();
         }
 
+        GameObject.Instantiate(_skull, _pairedReceiver.transform.position, _pairedReceiver.transform.rotation, null);
+        GameObject.Instantiate(_skull, this.transform.position, this.transform.rotation, null);
         _pairedReceiver.EndCall();
         this.EndCall();
     }

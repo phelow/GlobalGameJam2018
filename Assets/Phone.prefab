@@ -303,6 +303,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tutorialLineRenderer: {fileID: 120822847648122228}
   _pairedReceiver: {fileID: 114189130851200360}
+  _heart: {fileID: 1021149647626336, guid: 903b08c5d3ab9c740a91255b1ed2df68, type: 2}
+  _skull: {fileID: 1125925328144874, guid: f2c02e8c68fff0440a7e54f01b657366, type: 2}
 --- !u!114 &114189130851200360
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -316,6 +318,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tutorialLineRenderer: {fileID: 120562112097869870}
   _pairedReceiver: {fileID: 114141049180761156}
+  _heart: {fileID: 1021149647626336, guid: 903b08c5d3ab9c740a91255b1ed2df68, type: 2}
+  _skull: {fileID: 1125925328144874, guid: f2c02e8c68fff0440a7e54f01b657366, type: 2}
 --- !u!114 &114565196135129254
 MonoBehaviour:
   m_ObjectHideFlags: 1
