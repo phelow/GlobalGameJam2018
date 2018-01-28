@@ -45,13 +45,17 @@ public class PlayerPhoneManager : MonoBehaviour
 
         if (_heldPhone == null)
         {
+
+            float heldUrgency = 1.0f;
+            foreach (Monster monster in GameMaster.s_instance.GetAllMonsters())
+            {
+                if (!monster.IsMatchable())
+                {
+                    heldUrgency = Mathf.Min(heldUrgency, monster.GetHealth());
+                }
+            }
             foreach (Receiver reciever in _recievers)
             {
-                float urgency = 1.0f;
-                foreach (Monster monster in GameMaster.s_instance.GetAllMonsters())
-                {
-                    urgency = Mathf.Min(urgency, monster.GetHealth());
-                }
 
                 if (reciever.Isheld() || !HasPotentialMatch(reciever))
                 {
@@ -60,7 +64,14 @@ public class PlayerPhoneManager : MonoBehaviour
 
                 reciever.SetTutorialTarget(this.transform.position);
 
-                reciever.SetUrgency(urgency);
+                if (reciever.HasMonsterOnOtherEnd())
+                {
+                    reciever.SetUrgency(reciever.GetMonsterOnOtherEnd().GetHealth());
+                }
+                else
+                {
+                    reciever.SetUrgency(heldUrgency);
+                }
             }
         }
         else

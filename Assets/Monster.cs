@@ -32,7 +32,7 @@ public class Monster : Tutorializeable {
 
     // Update is called once per frame
     void Update () {
-		if(_matches.Count > 0 &&( _phone == null || (_phone.GetMonsterOnOtherEnd() == null) || !_matches.Contains(_phone.GetMonsterOnOtherEnd()) && PlayerPhoneManager.s_instance.HasUnusedPhones))
+		if(IsMatchable())
         {
             SubtractHealth(Time.deltaTime * c_timeModifier);
         }
@@ -41,6 +41,28 @@ public class Monster : Tutorializeable {
     internal void RemoveMatch(Monster monster)
     {
         this._matches.Remove(monster);
+    } 
+
+    internal bool IsMatchable()
+    {
+        foreach(Monster match in _matches)
+        {
+            if(!match.HasPhone() && PlayerPhoneManager.s_instance.HasUnusedPhones)
+            {
+                return true;
+            }
+            if (match.HasPhone() && !match.GetPhone().HasMonsterOnOtherEnd())
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private Receiver GetPhone()
+    {
+        return this._phone;
     }
 
     private void SubtractHealth(float deltaTime)
