@@ -101,10 +101,6 @@ public class Monster : Tutorializeable
             {
                 return true;
             }
-            if (match.HasPhone() && (!match.GetPhone().HasMonsterOnOtherEnd()))
-            {
-                return true;
-            }
         }
 
         return false;
