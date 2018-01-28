@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Monster : Tutorializeable {
-
+    public string name;
     private Receiver _phone;
     private List<Monster> _matches = new List<Monster>();
     private float _health = 1.0f;
@@ -17,10 +19,29 @@ public class Monster : Tutorializeable {
     [SerializeField]
     private SpriteRenderer _spriteRenderer;
 
+    [SerializeField]
+    private Text _monsterText;
+
     public bool HasAvailableMatches { get; set; }
+    private static string RandomString(int length)
+    {
+        const string pool = "abcdefghijklmnopqrstuvwxyz";
+        var builder = new StringBuilder();
+
+        for (var i = 0; i < length; i++)
+        {
+            var c = pool[UnityEngine.Random.Range(0, pool.Length)];
+            builder.Append(c);
+        }
+
+        return builder.ToString();
+    }
 
     private void Start()
     {
+        name = RandomString(UnityEngine.Random.Range(2, 10));
+        _monsterText.text = name;
+        MessageSpawner.s_instance.SpawnMessage(name + " has joined your dating site.");
         _spriteRenderer.sprite = _images[UnityEngine.Random.RandomRange(0,_images.Count)];
         StartCoroutine(DelayedCouroutineFreezing());
     }
@@ -74,6 +95,12 @@ public class Monster : Tutorializeable {
     private void SubtractHealth(float deltaTime)
     {
         _health -= deltaTime;
+        if(_health < .5f)
+        {
+
+            MessageSpawner.s_instance.SpawnMessage(this.name + " is getting impatient.");
+        }
+
         if(_health < 0)
         {
             GameMaster.s_instance.EndGame();

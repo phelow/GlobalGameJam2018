@@ -31,6 +31,7 @@ public class Receiver : Tutorializeable {
 
     private IEnumerator PlaceCall()
     {
+        MessageSpawner.s_instance.SpawnMessage(this.GetMonsterOnOtherEnd().name + " is dating " + this._holder.name);
         GameMaster.s_instance.AddPoint();
         _pairedReceiver.GetMonster().ResetHealth();
         this.GetMonster().ResetHealth();
@@ -49,6 +50,8 @@ public class Receiver : Tutorializeable {
 
     internal void EndCall()
     {
+        MessageSpawner.s_instance.SpawnMessage(this.GetMonsterOnOtherEnd().name + " has broken up with " + this._holder.name);
+
         if (this._holder != null)
         {
             this._holder.RemoveMatch(this.GetMonsterOnOtherEnd());
