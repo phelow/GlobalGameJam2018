@@ -54,6 +54,7 @@ public class PlayerPhoneManager : MonoBehaviour
                     heldUrgency = Mathf.Min(heldUrgency, monster.GetHealth());
                 }
             }
+
             foreach (Receiver reciever in _recievers)
             {
 

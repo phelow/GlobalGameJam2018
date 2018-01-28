@@ -17228,6 +17228,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 41
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1541252009 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1857258238427238, guid: 4f1c69fa5c308d64584550a0dc1d86cf,
+    type: 2}
+  m_PrefabInternal: {fileID: 721338904}
 --- !u!1 &1542169747
 GameObject:
   m_ObjectHideFlags: 0
@@ -19958,6 +19963,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114301813897629056, guid: 2a8684f8b32de0e44884a7e37cf4b5ba,
+        type: 2}
+      propertyPath: m_cableA
+      value: 
+      objectReference: {fileID: 1541252009}
+    - target: {fileID: 114301813897629056, guid: 2a8684f8b32de0e44884a7e37cf4b5ba,
+        type: 2}
+      propertyPath: m_cableB
+      value: 
+      objectReference: {fileID: 1908615871}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a8684f8b32de0e44884a7e37cf4b5ba, type: 2}
   m_IsPrefabParent: 0
@@ -20910,6 +20925,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 291
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1908615871 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1055983156074596, guid: 4f1c69fa5c308d64584550a0dc1d86cf,
+    type: 2}
+  m_PrefabInternal: {fileID: 721338904}
 --- !u!1 &1913384746
 GameObject:
   m_ObjectHideFlags: 0
