@@ -188,7 +188,7 @@ public class GameMaster : MonoBehaviour
             y = UnityEngine.Random.Range(startingPoint, startingPoint + _boundY) + _boundY;
         }
 
-        Vector3 point = new Vector3(x, y, 1);
+        Vector3 point = new Vector3(x, y, 0);
         Vector2 screenPos = Camera.main.WorldToScreenPoint(point);
 
         Monster monster = GameObject.Instantiate(_monster, point, new Quaternion(0, 0, 0, 0), null).GetComponent<Monster>();

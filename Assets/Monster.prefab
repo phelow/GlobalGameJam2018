@@ -39,10 +39,26 @@ GameObject:
   - component: {fileID: 4417520854518970}
   - component: {fileID: 58972582478766044}
   - component: {fileID: 114145436547916122}
-  - component: {fileID: 120740505395001036}
   - component: {fileID: 50606661921493370}
   m_Layer: 0
   m_Name: Monster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1232996236488448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4313910695114652}
+  - component: {fileID: 120925137679720470}
+  - component: {fileID: 114301813897629056}
+  m_Layer: 0
+  m_Name: LineRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,6 +143,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4313910695114652
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1232996236488448}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4417520854518970}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4417520854518970
 Transform:
   m_ObjectHideFlags: 1
@@ -139,6 +168,7 @@ Transform:
   m_Children:
   - {fileID: 4694462878957644}
   - {fileID: 4544310587936262}
+  - {fileID: 4313910695114652}
   - {fileID: 4671602023882350}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -168,7 +198,7 @@ Transform:
   m_LocalScale: {x: 0.13776895, y: 0.13776895, z: 0.13776895}
   m_Children: []
   m_Father: {fileID: 4417520854518970}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4694462878957644
 Transform:
@@ -260,7 +290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0ce9423211c5594eb04fa4e72021883, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tutorialLineRenderer: {fileID: 120740505395001036}
+  _tutorialLineRenderer: {fileID: 120925137679720470}
   name: 
   _rigidbody: {fileID: 50606661921493370}
   _images:
@@ -270,6 +300,20 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4b9808e53cf92e947a2ce2666af78976, type: 3}
   _spriteRenderer: {fileID: 212073487592728348}
   _monsterText: {fileID: 114445085134754420}
+--- !u!114 &114301813897629056
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1232996236488448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec2121e8a1f7d9409b1dd8336edd562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_cableA: {fileID: 0}
+  m_cableB: {fileID: 0}
+  m_cableRenderer: {fileID: 120925137679720470}
 --- !u!114 &114445085134754420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -324,12 +368,12 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!120 &120740505395001036
+--- !u!120 &120925137679720470
 LineRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1131448593166266}
+  m_GameObject: {fileID: 1232996236488448}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -338,7 +382,7 @@ LineRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9b42ae2a6ef57c740a2b12201228e518, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -355,15 +399,15 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1173754739
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.2
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -411,7 +455,7 @@ LineRenderer:
     textureMode: 0
     generateLightingData: 0
   m_UseWorldSpace: 1
-  m_Loop: 1
+  m_Loop: 0
 --- !u!212 &212073487592728348
 SpriteRenderer:
   m_ObjectHideFlags: 1
