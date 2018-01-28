@@ -46,6 +46,7 @@ public class GameMaster : MonoBehaviour
 
             foreach (Monster monster in _monsters)
             {
+                monster.HasAvailableMatches = false;
                 foreach (Monster monster2 in monster.GetMatches())
                 {
                     if (!monster2.HasPhone())
