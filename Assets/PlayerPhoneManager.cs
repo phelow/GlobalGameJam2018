@@ -172,6 +172,10 @@ public class PlayerPhoneManager : MonoBehaviour
         this.CollideWithGameObject(collision.gameObject);
     }
 
+    public bool HasPhone()
+    {
+        return _heldPhone != null && _heldPhone.HasMonsterOnOtherEnd() == false ;
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         this.CollideWithGameObject(other.gameObject);

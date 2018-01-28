@@ -97,7 +97,7 @@ public class Monster : Tutorializeable
             {
                 continue;
             }
-            if (!match.HasPhone() && PlayerPhoneManager.s_instance.HasUnusedPhones)
+            if (!match.HasPhone())
             {
                 return true;
             }
