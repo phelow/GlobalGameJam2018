@@ -654,18 +654,6 @@ Prefab:
       propertyPath: m_Name
       value: Monster (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4417520854518970, guid: 2a8684f8b32de0e44884a7e37cf4b5ba, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4417520854518970, guid: 2a8684f8b32de0e44884a7e37cf4b5ba, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4417520854518970, guid: 2a8684f8b32de0e44884a7e37cf4b5ba, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a8684f8b32de0e44884a7e37cf4b5ba, type: 2}
   m_IsPrefabParent: 0
