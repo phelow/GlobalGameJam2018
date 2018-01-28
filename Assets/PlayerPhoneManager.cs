@@ -49,7 +49,7 @@ public class PlayerPhoneManager : MonoBehaviour
             float heldUrgency = 1.0f;
             foreach (Monster monster in GameMaster.s_instance.GetAllMonsters())
             {
-                if (!monster.IsMatchable())
+                if (monster.CanTakeAction())
                 {
                     heldUrgency = Mathf.Min(heldUrgency, monster.GetHealth());
                 }

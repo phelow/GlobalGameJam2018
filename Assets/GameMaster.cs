@@ -32,7 +32,7 @@ public class GameMaster : MonoBehaviour
     {
         _boundX = 5;
         _boundY = 5;
-
+        
         StartCoroutine(MatchMonsters());
         StartCoroutine(SpawnMonsters());
         StartCoroutine(CheckForMoves());
@@ -43,7 +43,20 @@ public class GameMaster : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1.0f);
-            m_playerHasMoves = false;
+
+            foreach (Monster monster in _monsters)
+            {
+                foreach (Monster monster2 in monster.GetMatches())
+                {
+                    if (!monster2.HasPhone())
+                    {
+                        monster.HasAvailableMatches = true;
+                    }
+                }
+            }
+
+
+                    m_playerHasMoves = false;
             if (!PlayerPhoneManager.s_instance.HasUnusedPhonePairs())
             {
                 continue;

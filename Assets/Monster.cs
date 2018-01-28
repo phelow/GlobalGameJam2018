@@ -17,6 +17,8 @@ public class Monster : Tutorializeable {
     [SerializeField]
     private SpriteRenderer _spriteRenderer;
 
+    public bool HasAvailableMatches { get; set; }
+
     private void Start()
     {
         _spriteRenderer.sprite = _images[UnityEngine.Random.RandomRange(0,_images.Count)];
@@ -32,7 +34,7 @@ public class Monster : Tutorializeable {
 
     // Update is called once per frame
     void Update () {
-		if(IsMatchable())
+		if(CanTakeAction())
         {
             SubtractHealth(Time.deltaTime * c_timeModifier);
         }
@@ -43,15 +45,19 @@ public class Monster : Tutorializeable {
         this._matches.Remove(monster);
     } 
 
-    internal bool IsMatchable()
+    internal bool CanTakeAction()
     {
         foreach(Monster match in _matches)
         {
+            if (!match.HasAvailableMatches)
+            {
+                continue;
+            }
             if(!match.HasPhone() && PlayerPhoneManager.s_instance.HasUnusedPhones)
             {
                 return true;
             }
-            if (match.HasPhone() && !match.GetPhone().HasMonsterOnOtherEnd())
+            if (match.HasPhone() && (!match.GetPhone().HasMonsterOnOtherEnd()))
             {
                 return true;
             }
