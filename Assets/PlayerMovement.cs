@@ -12,6 +12,13 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 m_lastScreenPosition;
     private const float c_movementConstant = 500.0f;
 
+
+    [SerializeField]
+    private List<AudioClip> _audioclips;
+
+    [SerializeField]
+    private AudioSource _audioclip;
+
     void Awake()
     {
     }
@@ -20,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
         {
+            _audioclip.PlayOneShot(_audioclips[Random.Range(0, _audioclips.Count)]);
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             m_rigidbody.AddForce((new Vector2(worldPos.x, worldPos.y) - new Vector2(transform.position.x, transform.position.y)).normalized * c_movementConstant);
         }

@@ -15,6 +15,7 @@ public class Monster : Tutorializeable
     [SerializeField]
     private Rigidbody2D _rigidbody;
 
+
     [SerializeField]
     private List<Sprite> _images;
     [SerializeField]
