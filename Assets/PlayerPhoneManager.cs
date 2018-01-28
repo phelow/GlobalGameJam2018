@@ -82,6 +82,18 @@ public class PlayerPhoneManager : MonoBehaviour
         }
     }
 
+    internal bool HasUnusedPhonePairs()
+    {
+        foreach(Receiver r in _recievers)
+        {
+            if(!r.Isheld() && r.GetMonsterOnOtherEnd() == null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void CollideWithGameObject(GameObject go)
     {
         Monster monster = go.GetComponent<Monster>();

@@ -20,7 +20,7 @@ public class GameMaster : MonoBehaviour
     private int _score = 0;
     [SerializeField]
     private Text _scoreText;
-
+    private bool m_playerHasMoves;
 
     private void Awake()
     {
@@ -35,6 +35,37 @@ public class GameMaster : MonoBehaviour
 
         StartCoroutine(MatchMonsters());
         StartCoroutine(SpawnMonsters());
+        StartCoroutine(CheckForMoves());
+    }
+
+    private IEnumerator CheckForMoves()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1.0f);
+            m_playerHasMoves = false;
+            if (!PlayerPhoneManager.s_instance.HasUnusedPhonePairs())
+            {
+                continue;
+            }
+
+
+            foreach (Monster monster in _monsters)
+            {
+                if (monster.HasPhone())
+                {
+                    continue;
+                }
+                foreach (Monster monster2 in monster.GetMatches())
+                {
+                    if (!monster2.HasPhone())
+                    {
+                        m_playerHasMoves = true;
+                        continue;
+                    }
+                }
+            }
+        }
     }
 
     internal List<Monster> GetAllMonsters()
@@ -45,6 +76,11 @@ public class GameMaster : MonoBehaviour
     internal void EndGame()
     {
         PlayerPrefs.SetInt("HighScore", _score);
+    }
+
+    internal bool PlayerHasMoves()
+    {
+        return m_playerHasMoves;
     }
 
     public void AddPoint()

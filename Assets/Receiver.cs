@@ -34,7 +34,15 @@ public class Receiver : Tutorializeable {
         GameMaster.s_instance.AddPoint();
         _pairedReceiver.GetMonster().ResetHealth();
         this.GetMonster().ResetHealth();
-        yield return new WaitForSeconds(c_callTime);
+        yield return new WaitForSeconds(1.0f);
+
+        float tPassed = 0.0f;
+        while(tPassed <= 20.0f && GameMaster.s_instance.PlayerHasMoves())
+        {
+            tPassed += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
         _pairedReceiver.EndCall();
         this.EndCall();
     }

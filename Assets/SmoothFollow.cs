@@ -19,7 +19,7 @@ public class SmoothFollow : MonoBehaviour
     [SerializeField]
 
     private Rigidbody2D m_rigidbody;
-    private const float c_cameraForce = 100.0f;
+    private const float c_cameraForce = 1000.0f;
 
 
 
@@ -28,7 +28,7 @@ public class SmoothFollow : MonoBehaviour
     void Update()
     {
 
-        m_rigidbody.AddForce((m_player.transform.position - transform.position).normalized * (1 + 10 * Vector2.Distance(m_player.transform.position, transform.position)) * c_cameraForce * Time.deltaTime);
+        m_rigidbody.AddForce((m_player.transform.position - transform.position).normalized * (1 + 10 * Mathf.Pow(Vector2.Distance(m_player.transform.position, transform.position), 2)) * c_cameraForce * Time.deltaTime);
 
     }
 
