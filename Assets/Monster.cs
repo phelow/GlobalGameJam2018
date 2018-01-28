@@ -5,7 +5,8 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Monster : Tutorializeable {
+public class Monster : Tutorializeable
+{
     public string name;
     private Receiver _phone;
     private List<Monster> _matches = new List<Monster>();
@@ -42,39 +43,50 @@ public class Monster : Tutorializeable {
         name = RandomString(UnityEngine.Random.Range(2, 10));
         _monsterText.text = name;
         MessageSpawner.s_instance.SpawnMessage(name + " has joined your dating site.");
-        _spriteRenderer.sprite = _images[UnityEngine.Random.RandomRange(0,_images.Count)];
+        _spriteRenderer.sprite = _images[UnityEngine.Random.RandomRange(0, _images.Count)];
         StartCoroutine(DelayedCouroutineFreezing());
+        StartCoroutine(Wobble());
+    }
+
+    private IEnumerator Wobble()
+    {
+        while (true)
+        {
+            _rigidbody.AddTorque(UnityEngine.Random.Range(-1.0f, 1.0f) * 100000.0f);
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0.2f, 1.0f));
+            _rigidbody.AddTorque(UnityEngine.Random.Range(-1.0f, 1.0f) * 100000.0f);
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0.2f, 1.0f));
+        }
     }
 
     private IEnumerator DelayedCouroutineFreezing()
     {
         yield return new WaitForSeconds(1.0f);
-
-        _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
     // Update is called once per frame
-    void Update () {
-		if(CanTakeAction())
+    void Update()
+    {
+        if (CanTakeAction())
         {
             SubtractHealth(Time.deltaTime * c_timeModifier);
         }
-	}
+    }
 
     internal void RemoveMatch(Monster monster)
     {
         this._matches.Remove(monster);
-    } 
+    }
 
     internal bool CanTakeAction()
     {
-        foreach(Monster match in _matches)
+        foreach (Monster match in _matches)
         {
             if (!match.HasAvailableMatches)
             {
                 continue;
             }
-            if(!match.HasPhone() && PlayerPhoneManager.s_instance.HasUnusedPhones)
+            if (!match.HasPhone() && PlayerPhoneManager.s_instance.HasUnusedPhones)
             {
                 return true;
             }
@@ -96,13 +108,13 @@ public class Monster : Tutorializeable {
     private void SubtractHealth(float deltaTime)
     {
         _health -= deltaTime;
-        if(_health < .5f && patient)
+        if (_health < .5f && patient)
         {
             patient = false;
             MessageSpawner.s_instance.SpawnMessage(this.name + " is getting impatient.");
         }
 
-        if(_health < 0)
+        if (_health < 0)
         {
             GameMaster.s_instance.EndGame();
         }
@@ -123,12 +135,12 @@ public class Monster : Tutorializeable {
 
     internal bool GivePhone(Receiver phone)
     {
-        if(_matches.Count == 0)
+        if (_matches.Count == 0)
         {
             return false;
         }
-        
-        if (_phone == null && (phone.GetMonsterOnOtherEnd() == null|| (this._matches.Contains(phone.GetMonsterOnOtherEnd()))))
+
+        if (_phone == null && (phone.GetMonsterOnOtherEnd() == null || (this._matches.Contains(phone.GetMonsterOnOtherEnd()))))
         {
             _phone = phone;
             _phone.transform.SetParent(this.transform);
