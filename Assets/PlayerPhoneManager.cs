@@ -66,6 +66,11 @@ public class PlayerPhoneManager : MonoBehaviour
             {
                 foreach (Monster monster in _heldPhone.GetMonsterOnOtherEnd().GetMatches())
                 {
+                    if (monster.HasPhone())
+                    {
+                        continue;
+                    }
+
                     monster.SetTutorialTarget(this.transform.position);
                 }
             }
@@ -99,7 +104,7 @@ public class PlayerPhoneManager : MonoBehaviour
                 _heldPhone = handheld;
             }
         }
-        else if (monster != null && _heldPhone != null)
+        else if (monster != null && _heldPhone != null && !monster.HasPhone())
         {
             if (monster.GivePhone(_heldPhone))
             {
