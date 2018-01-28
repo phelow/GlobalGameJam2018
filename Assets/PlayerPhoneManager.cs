@@ -47,12 +47,20 @@ public class PlayerPhoneManager : MonoBehaviour
         {
             foreach (Receiver reciever in _recievers)
             {
+                float urgency = 1.0f;
+                foreach (Monster monster in GameMaster.s_instance.GetAllMonsters())
+                {
+                    urgency = Mathf.Min(urgency, monster.GetHealth());
+                }
+
                 if (reciever.Isheld() || !HasPotentialMatch(reciever))
                 {
                     continue;
                 }
 
                 reciever.SetTutorialTarget(this.transform.position);
+
+                reciever.SetUrgency(urgency);
             }
         }
         else
@@ -61,7 +69,7 @@ public class PlayerPhoneManager : MonoBehaviour
             {
                 reciever.ClearTutorialTarget();
             }
-            
+
             if (_heldPhone.HasMonsterOnOtherEnd())
             {
                 foreach (Monster monster in _heldPhone.GetMonsterOnOtherEnd().GetMatches())
@@ -84,9 +92,9 @@ public class PlayerPhoneManager : MonoBehaviour
 
     internal bool HasUnusedPhonePairs()
     {
-        foreach(Receiver r in _recievers)
+        foreach (Receiver r in _recievers)
         {
-            if(!r.Isheld() && r.GetMonsterOnOtherEnd() == null)
+            if (!r.Isheld() && r.GetMonsterOnOtherEnd() == null)
             {
                 return true;
             }
@@ -104,9 +112,9 @@ public class PlayerPhoneManager : MonoBehaviour
             if (handheld != null && handheld.Isheld() == false)
             {
                 //If all of the matches of the monster on the other line are holding phones do not let the player pick up the phone o
-                
 
-                if(!HasPotentialMatch(handheld))
+
+                if (!HasPotentialMatch(handheld))
                 {
                     return;
                 }
