@@ -10,6 +10,7 @@ public class Tutorializeable : MonoBehaviour
         _tutorialLineRenderer.positionCount = 2;
         _tutorialLineRenderer.SetPosition(0, this.transform.position);
         _tutorialLineRenderer.SetPosition(1, position);
+        _tutorialLineRenderer.widthMultiplier = Mathf.Lerp(1, .2f, Vector3.Distance(this.transform.position, position) / 100.0f);
     }
 
     internal void SetUrgency(float urgency)

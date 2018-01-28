@@ -91,13 +91,14 @@ public class Monster : Tutorializeable {
     {
         return this._phone;
     }
+    bool patient = true;
 
     private void SubtractHealth(float deltaTime)
     {
         _health -= deltaTime;
-        if(_health < .5f)
+        if(_health < .5f && patient)
         {
-
+            patient = false;
             MessageSpawner.s_instance.SpawnMessage(this.name + " is getting impatient.");
         }
 
