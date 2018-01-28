@@ -13,11 +13,11 @@ public class MessageSpawner : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
         s_instance = this;
-	}
+        _queuedMessages.Enqueue("You have started a new dating site for monsters.");
+    }
 
     private void Start()
     {
-        _queuedMessages.Enqueue("You have started a new dating site for monsters.");
         StartCoroutine(SpawnRoutine());
     }
 
@@ -40,7 +40,7 @@ public class MessageSpawner : MonoBehaviour {
 
     public float GetSpeed()
     {
-        return _queuedMessages.Count;
+        return _queuedMessages.Count + 1;
     }
 	
 	// Update is called once per frame
