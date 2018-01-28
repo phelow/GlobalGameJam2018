@@ -8,10 +8,9 @@ public class Tutorializeable : MonoBehaviour
     internal void SetTutorialTarget(Vector3 position)
     {
         _tutorialLineRenderer.positionCount = 2;
-        _tutorialLineRenderer.SetPosition(0, this.transform.position);
+        _tutorialLineRenderer.SetPosition(0, Vector3.Lerp(this.transform.position, position, .2f));
         _tutorialLineRenderer.SetPosition(1, position);
-        _tutorialLineRenderer.widthMultiplier = Mathf.Lerp(1, .2f, Vector3.Distance(this.transform.position, position) / 100.0f);
-        _tutorialLineRenderer.startWidth = 0.1f;
+        _tutorialLineRenderer.startWidth = 0f;
         _tutorialLineRenderer.endWidth = Mathf.Lerp(1, .2f, Vector3.Distance(this.transform.position, position) / 100.0f);
     }
 
