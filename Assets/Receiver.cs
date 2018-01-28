@@ -50,8 +50,14 @@ public class Receiver : Tutorializeable {
 
     internal void EndCall()
     {
-        MessageSpawner.s_instance.SpawnMessage(this.GetMonsterOnOtherEnd().name + " has broken up with " + this._holder.name);
+        try
+        {
+            MessageSpawner.s_instance.SpawnMessage(this.GetMonsterOnOtherEnd().name + " has broken up with " + this._holder.name);
+        }
+        catch
+        {
 
+        }
         if (this._holder != null)
         {
             this._holder.RemoveMatch(this.GetMonsterOnOtherEnd());
