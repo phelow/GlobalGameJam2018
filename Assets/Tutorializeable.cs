@@ -15,7 +15,7 @@ public class Tutorializeable : MonoBehaviour
 
     internal void SetUrgency(float urgency)
     {
-        Color color = Color.Lerp(Color.red, Color.green, urgency);
+        Color color = Color.Lerp(Color.Lerp(Color.red, Color.green, urgency), Color.clear, 0.5f);
         _tutorialLineRenderer.material.color = color;
     }
 
