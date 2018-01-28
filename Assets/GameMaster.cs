@@ -76,6 +76,7 @@ public class GameMaster : MonoBehaviour
     internal void EndGame()
     {
         PlayerPrefs.SetInt("HighScore", _score);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
     internal bool PlayerHasMoves()
