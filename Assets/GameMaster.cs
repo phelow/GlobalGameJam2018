@@ -32,7 +32,7 @@ public class GameMaster : MonoBehaviour
     {
         _boundX = 5;
         _boundY = 5;
-        
+
         StartCoroutine(MatchMonsters());
         StartCoroutine(SpawnMonsters());
         StartCoroutine(CheckForMoves());
@@ -57,7 +57,7 @@ public class GameMaster : MonoBehaviour
             }
 
 
-                    m_playerHasMoves = false;
+            m_playerHasMoves = false;
             if (!PlayerPhoneManager.s_instance.HasUnusedPhonePairs())
             {
                 continue;
@@ -89,7 +89,7 @@ public class GameMaster : MonoBehaviour
 
     internal void EndGame()
     {
-        PlayerPrefs.SetInt("HighScore", _score);
+        PlayerPrefs.SetInt("HighScore", Mathf.Max(PlayerPrefs.GetInt("HighScore", 0), _score));
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 

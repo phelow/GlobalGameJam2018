@@ -51,7 +51,7 @@ public class Receiver : Tutorializeable {
     private IEnumerator ThrowPhone()
     {
         Rigidbody2D rigidbody = this.gameObject.AddComponent<Rigidbody2D>();
-        rigidbody.AddForce(10.0f * (this.transform.position - this._holder.transform.position));
+        rigidbody.AddForce(30.0f * (this.transform.position - this._holder.transform.position));
         rigidbody.gravityScale = 0.0f;
         yield return new WaitForSeconds(4.0f);
         Destroy(rigidbody);
