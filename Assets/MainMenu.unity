@@ -534,7 +534,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Monstinder 2, click to start. Your high score is: '
+  m_Text: 'Click to start. Your high score is: '
 --- !u!222 &963452224
 CanvasRenderer:
   m_ObjectHideFlags: 0
