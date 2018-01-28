@@ -58,6 +58,11 @@ public class Receiver : Tutorializeable {
         this.EndCall();
     }
 
+    internal Receiver PairedReciever()
+    {
+        return _pairedReceiver;
+    }
+
     private IEnumerator ThrowPhone()
     {
         Rigidbody2D rigidbody = this.gameObject.AddComponent<Rigidbody2D>();

@@ -58,7 +58,7 @@ public class PlayerPhoneManager : MonoBehaviour
             foreach (Receiver reciever in _recievers)
             {
 
-                if (reciever.Isheld() || !HasPotentialMatch(reciever))
+                if (reciever.Isheld()|| _heldPhone == reciever.PairedReciever() || !HasPotentialMatch(reciever))
                 {
                     continue;
                 }
