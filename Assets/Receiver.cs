@@ -48,8 +48,13 @@ public class Receiver : Tutorializeable {
         this.EndCall();
     }
 
-    internal void EndCall()
+    private IEnumerator ThrowPhone()
     {
+        Rigidbody2D rigidbody = this.gameObject.AddComponent<Rigidbody2D>();
+        rigidbody.AddForce(10.0f * (this.transform.position - this._holder.transform.position));
+        rigidbody.gravityScale = 0.0f;
+        yield return new WaitForSeconds(4.0f);
+        Destroy(rigidbody);
         try
         {
             MessageSpawner.s_instance.SpawnMessage(this.GetMonsterOnOtherEnd().name + " has broken up with " + this._holder.name);
@@ -64,7 +69,7 @@ public class Receiver : Tutorializeable {
         }
 
         Monster temp = this.GetMonsterOnOtherEnd();
-        if(temp != null)
+        if (temp != null)
         {
             temp.RemoveMatch(this._holder);
         }
@@ -74,6 +79,12 @@ public class Receiver : Tutorializeable {
             this._holder.EndCall();
         }
         this._holder = null;
+    }
+
+    internal void EndCall()
+    {
+        StartCoroutine(ThrowPhone());
+        
     }
 
     internal Monster GetHolder()
