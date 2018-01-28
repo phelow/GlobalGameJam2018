@@ -12,8 +12,14 @@ public class Monster : Tutorializeable {
     [SerializeField]
     private Rigidbody2D _rigidbody;
 
+    [SerializeField]
+    private List<Sprite> _images;
+    [SerializeField]
+    private SpriteRenderer _spriteRenderer;
+
     private void Start()
     {
+        _spriteRenderer.sprite = _images[UnityEngine.Random.RandomRange(0,_images.Count)];
         StartCoroutine(DelayedCouroutineFreezing());
     }
 
